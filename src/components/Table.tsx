@@ -47,7 +47,7 @@ const Table = () => {
               id="checkBoxRow-02"
             />
           </th>
-          <td>ООО &quot;Амазон&quot;</td>
+          <td>ООО &quot;Ромашка&quot;</td>
           <td>sfsf-222</td>
           <td>test@gmail.com</td>
           <td>7 дней</td>
