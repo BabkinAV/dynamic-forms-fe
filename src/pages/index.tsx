@@ -1,12 +1,16 @@
 import Head from 'next/head';
+import Script from 'next/script';
 import Table from '../components/Table';
 import { useState } from 'react';
 import { Customer } from '../types';
 import customerData from '../../customerData';
+import CustomerCreateModal from '../components/CustomerCreateModal';
 
 export default function Home() {
   const [customerDataArr, setCustomerDataArr] =
     useState<Customer[]>(customerData);
+
+  const [showModal, setShowModal] = useState(false);
 
   let tableRows = customerDataArr.map(el => ({
     customerName: el.name,
@@ -30,11 +34,23 @@ export default function Home() {
           <div className="row mb-3">
             <div className="col d-flex justify-content-between">
               <h4>Клиенты</h4>
-              <button className="btn btn-primary">+ Добавить клиента</button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setShowModal(true)}
+              >
+                <div className="d-flex align-items-center">
+                  <div>+ Добавить клиента</div>
+                </div>
+              </button>
             </div>
           </div>
           <Table tableRows={tableRows} />
         </div>
+        <CustomerCreateModal
+          handleClose={() => setShowModal(false)}
+          showModal={showModal}
+        />
       </main>
     </>
   );
