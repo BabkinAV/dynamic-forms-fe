@@ -1,6 +1,17 @@
 import React from 'react';
+import { Customer } from '../types';
+import dayjs from 'dayjs';
 
-const Table = () => {
+interface tableRow {
+	customerName: string,
+	customerId: string,
+	customerEmail: string,
+	customerDeferralsDays: number,
+	customerCreationDay: string,
+	customerUpdateDay: string
+}
+
+const Table = ({tableRows} : {tableRows: tableRow[]})   => {
   return (
     <table className="table table-hover">
       <thead>
@@ -16,12 +27,28 @@ const Table = () => {
           <th scope="col">Имя</th>
           <th scope="col">ID</th>
           <th scope="col">Email</th>
-          <th scope="col">Отстрочка оплаты</th>
+          <th scope="col">Отсрочка оплаты</th>
           <th scope="col">Создан</th>
-          <th scope="col">изменен</th>
+          <th scope="col">Изменен</th>
         </tr>
       </thead>
       <tbody>
+				{tableRows.map((row) => (<tr key={row.customerId}>
+          <th scope="row">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={`checkBoxRow-${row.customerId}`}
+              id={`checkBoxRow-${row.customerId}`}
+            />
+          </th>
+          <td>{row.customerName}</td>
+          <td>{row.customerId}</td>
+          <td>{row.customerEmail}</td>
+          <td>{row.customerDeferralsDays + ' дней'}</td>
+          <td>{dayjs(row.customerCreationDay).format('DD.MM.YYYY')}</td>
+          <td>{dayjs(row.customerUpdateDay).format('DD.MM.YYYY')}</td>
+        </tr>))}
         <tr>
           <th scope="row">
             <input
@@ -35,22 +62,6 @@ const Table = () => {
           <td>sfsf-111</td>
           <td>test@gmail.com</td>
           <td>14 дней</td>
-          <td>31.03.2023</td>
-          <td>06.03.2023</td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value="checkBoxRow-02"
-              id="checkBoxRow-02"
-            />
-          </th>
-          <td>ООО &quot;Ромашка&quot;</td>
-          <td>sfsf-222</td>
-          <td>test@gmail.com</td>
-          <td>7 дней</td>
           <td>31.03.2023</td>
           <td>06.03.2023</td>
         </tr>

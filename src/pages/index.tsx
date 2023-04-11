@@ -1,8 +1,22 @@
 import Head from 'next/head';
 import Table from '../components/Table';
-
+import { useState } from 'react';
+import { Customer } from '../types';
+import customerData from '../../customerData';
 
 export default function Home() {
+  const [customerDataArr, setCustomerDataArr] =
+    useState<Customer[]>(customerData);
+
+  let tableRows = customerDataArr.map(el => ({
+    customerName: el.name,
+    customerId: el.id,
+    customerEmail: el.email,
+    customerDeferralsDays: el.deferral_days,
+    customerCreationDay: el.created_at,
+    customerUpdateDay: el.updated_at,
+  }));
+
   return (
     <>
       <Head>
@@ -12,14 +26,14 @@ export default function Home() {
         <link rel="shortcut icon" href="#"></link>
       </Head>
       <main>
-        <div className='container mt-5'>
-					<div className='row mb-3'>
-						<div className='col d-flex justify-content-between'>
-							<h4>Клиенты</h4>
-							<button className='btn btn-primary'>+ Добавить клиента</button>
-						</div>
-					</div>
-          <Table />
+        <div className="container mt-5">
+          <div className="row mb-3">
+            <div className="col d-flex justify-content-between">
+              <h4>Клиенты</h4>
+              <button className="btn btn-primary">+ Добавить клиента</button>
+            </div>
+          </div>
+          <Table tableRows={tableRows} />
         </div>
       </main>
     </>
