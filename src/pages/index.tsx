@@ -1,16 +1,33 @@
 import Head from 'next/head';
-import Script from 'next/script';
 import Table from '../components/Table';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Customer } from '../types';
-import customerData from '../../customerData';
 import CustomerCreateModal from '../components/CustomerCreateModal';
 
 export default function Home() {
   const [customerDataArr, setCustomerDataArr] =
-    useState<Customer[]>(customerData);
+    useState<Customer[]>([]);
 
   const [showModal, setShowModal] = useState(false);
+
+  const handleAddCustomer = (addedCustomer: Customer) => {
+    setCustomerDataArr(prevArrState => {
+      return [addedCustomer, ...prevArrState];
+    });
+  };
+
+  useEffect(() => {
+    axios
+      .get<Customer[]>('http://localhost:8080/customers?_sort=created_at&_order=desc')
+      .then(resp => {
+				setCustomerDataArr(resp.data)
+				console.log(resp.data.length);
+			})
+      .catch(err => {
+				console.log(err);
+			});
+  }, []);
 
   let tableRows = customerDataArr.map(el => ({
     customerName: el.name,
@@ -50,6 +67,7 @@ export default function Home() {
         <CustomerCreateModal
           handleClose={() => setShowModal(false)}
           showModal={showModal}
+          handleAddCustomer={handleAddCustomer}
         />
       </main>
     </>

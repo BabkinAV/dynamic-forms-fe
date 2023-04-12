@@ -1,13 +1,16 @@
 import React from 'react';
 import NewCustomerForm from './NewCustomerForm';
 import { Modal } from 'react-bootstrap';
+import { Customer } from '../types';
 
 const CustomerCreateModal = ({
   showModal,
   handleClose,
+  handleAddCustomer,
 }: {
   showModal: boolean;
   handleClose: () => void;
+  handleAddCustomer: (addedCustomer: Customer) => void;
 }) => {
   return (
     <Modal show={showModal} onHide={handleClose}>
@@ -15,7 +18,10 @@ const CustomerCreateModal = ({
         <Modal.Title>Создание цены</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <NewCustomerForm />
+        <NewCustomerForm
+          handleCloseModal={handleClose}
+          handleAddCustomer={handleAddCustomer}
+        />
       </Modal.Body>
     </Modal>
   );

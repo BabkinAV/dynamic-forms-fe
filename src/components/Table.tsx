@@ -84,22 +84,6 @@ const Table = ({ tableRows }: { tableRows: tableRow[] }) => {
               <td>{dayjs(row.customerUpdateDay).format('DD.MM.YYYY')}</td>
             </tr>
           ))}
-          <tr>
-            <th scope="row">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value="checkBoxRow-01"
-                id="checkBoxRow-01"
-              />
-            </th>
-            <td>ООО &quot;Амазон&quot;</td>
-            <td>sfsf-111</td>
-            <td>test@gmail.com</td>
-            <td>14 дней</td>
-            <td>31.03.2023</td>
-            <td>06.03.2023</td>
-          </tr>
         </tbody>
       </table>
       <ToastContainer

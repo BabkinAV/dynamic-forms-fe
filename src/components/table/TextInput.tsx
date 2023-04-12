@@ -7,12 +7,13 @@ import { useField } from 'formik';
 type TextFieldProps = {
   label: string;
   name: string;
-	requiredInput: boolean
+  requiredInput: boolean;
 };
 
 const TextInput = ({
   label,
-	requiredInput,
+  requiredInput,
+	className,
   ...props
 }: TextFieldProps &
   InputHTMLAttributes<HTMLInputElement> &
@@ -20,8 +21,11 @@ const TextInput = ({
   FieldHookConfig<string>) => {
   const [field, meta] = useField(props);
   return (
-    <div className="form-group">
-      <label htmlFor={props.id || props.name} className='mb-2'><span className='text-danger'>*</span>{label}</label>
+    <div className={className + ' form-group'}>
+      <label htmlFor={props.id || props.name} className="mb-2">
+        {requiredInput && <span className="text-danger">*</span>}
+        {label}
+      </label>
       <input
         className={`form-control ${
           meta.touched && meta.error ? 'is-invalid' : null
