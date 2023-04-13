@@ -2,8 +2,9 @@ import React from 'react';
 import dayjs from 'dayjs';
 import clipboardIcon from '../../public/clipboard-icon.svg';
 import Image from 'next/image';
+import { toastifyConfig } from '../schemas/toastifySchema';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface tableRow {
@@ -20,16 +21,7 @@ const Table = ({ tableRows }: { tableRows: tableRow[] }) => {
     navigator.clipboard
       .writeText(customerId)
       .then(() => {
-        toast('Скопировано в буфер обмена!', {
-          position: 'bottom-center',
-          autoClose: 1000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: 'light',
-        });
+        toast('Скопировано в буфер обмена!', toastifyConfig as ToastOptions);
       })
       .catch((err: Error) => {
         console.log(err.message)

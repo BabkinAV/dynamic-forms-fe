@@ -1,16 +1,15 @@
-import React, { FormEventHandler } from 'react';
 import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
 import axios from 'axios';
 import { ToastContainer, ToastOptions, toast } from 'react-toastify';
 
-import TextInput from './table/TextInput';
-import { Customer } from '../types';
+import CustomerDetailsSection from './CustomerDetailsSection';
+import { Customer } from '../../types';
 import {
   newCustomerValidationSchema,
   newCustomerInitialValues,
-} from '../schemas/newCustomerSchema';
-import { toastifyConfig } from '../schemas/toastifySchema';
+} from '../../schemas/newCustomerSchema';
+import { toastifyConfig } from '../../schemas/toastifySchema';
+import OrganizationDetailsSection from './OrganizationDetailsSection';
 
 const NewCustomerForm = ({
   handleCloseModal,
@@ -31,6 +30,13 @@ const NewCustomerForm = ({
               email: values.customerEmail,
               deferral_days: values.deferralDays,
               credit_limit: values.creditLimit,
+							organization: {
+								name: values.organizationName,
+								inn: values.inn,
+								kpp: values.kpp,
+								ogrn: values.ogrn,
+								addr: values.organizationAddr,
+							}
             })
             .then(resp => {
               setSubmitting(false);
@@ -40,46 +46,17 @@ const NewCustomerForm = ({
             })
             .catch(err => {
               console.log(err);
-              toast.error('Что то пошло не так', toastifyConfig as ToastOptions);
+              toast.error(
+                'Что то пошло не так',
+                toastifyConfig as ToastOptions
+              );
               setSubmitting(false);
             });
         }}
       >
         <Form>
-          <div className="mb-4">
-            <TextInput
-              name="customerName"
-              type="text"
-              placeholder="Введите имя"
-              label="Имя"
-              className="mb-2"
-              requiredInput
-            />
-            <TextInput
-              name="customerEmail"
-              type="text"
-              placeholder="Введите Email"
-              className="mb-2"
-              label="Email"
-              requiredInput
-            />
-            <TextInput
-              name="deferralDays"
-              type="text"
-              placeholder="Введите дни отстрочки"
-              className="mb-2"
-              label="Дней отсрочки"
-              requiredInput
-            />
-            <TextInput
-              name="creditLimit"
-              type="text"
-              placeholder="Введите кредитный лимит"
-              className="mb-2"
-              label="Кредитный лимит"
-              requiredInput
-            />
-          </div>
+          <CustomerDetailsSection />
+					<OrganizationDetailsSection />
           <button type="submit" className="btn btn-primary mt-4">
             Создать
           </button>

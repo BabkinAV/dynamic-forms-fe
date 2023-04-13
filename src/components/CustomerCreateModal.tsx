@@ -1,5 +1,5 @@
 import React from 'react';
-import NewCustomerForm from './NewCustomerForm';
+import NewCustomerForm from './form/NewCustomerForm';
 import { Modal } from 'react-bootstrap';
 import { Customer } from '../types';
 

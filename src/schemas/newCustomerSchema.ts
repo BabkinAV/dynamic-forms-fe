@@ -13,6 +13,11 @@ export const newCustomerValidationSchema = Yup.object({
     .typeError('Введите число')
     .min(0, 'Кредитный лимит должен быть больше или равен нулю')
     .required('Кредитный лимит должен быть больше или равен нулю'),
+		organizationName: Yup.string().required('Введите имя'),
+		inn: Yup.string().required('Введите имя'),
+		kpp: Yup.string().required('Введите имя'),
+		ogrn: Yup.string().required('Введите имя'),
+		organizationAddr: Yup.string().required('Введите имя'),
 });
 
 export const newCustomerInitialValues = {
@@ -20,4 +25,10 @@ export const newCustomerInitialValues = {
 	customerEmail: '',
 	deferralDays: '',
 	creditLimit: '',
+	organizationName: '',
+	inn: '',
+	kpp: '',
+	ogrn: '',
+	organizationAddr: '',
+	
 }

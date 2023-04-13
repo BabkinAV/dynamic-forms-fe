@@ -22,7 +22,6 @@ export default function Home() {
       .get<Customer[]>('http://localhost:8080/customers?_sort=created_at&_order=desc')
       .then(resp => {
 				setCustomerDataArr(resp.data)
-				console.log(resp.data.length);
 			})
       .catch(err => {
 				console.log(err);
