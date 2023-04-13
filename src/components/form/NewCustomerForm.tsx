@@ -11,6 +11,7 @@ import {
 import { toastifyConfig } from '../../schemas/toastifySchema';
 import OrganizationDetailsSection from './formSections/OrganizationDetailsSection';
 import BankAccountsSection from './formSections/BankAccountsSection';
+import TextInput from './formElements/TextInput';
 
 const NewCustomerForm = ({
   handleCloseModal,
@@ -44,6 +45,7 @@ const NewCustomerForm = ({
                 addr: values.organizationAddr,
                 bank_accounts: values.bankAccounts,
               },
+							invoice_emails: values.invoiceEmails
             })
             .then(resp => {
               setSubmitting(false);
@@ -103,6 +105,47 @@ const NewCustomerForm = ({
                       )}
                     >
                       + Добавить еще счет
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
+            </div>
+            <div className="mb-4">
+              <h5>
+                <b>Emails для счетов</b>
+              </h5>
+              <FieldArray name="invoiceEmails">
+                {({ insert, remove, push }) => (
+                  <div className="mb-2">
+                    {values.invoiceEmails.length > 0 &&
+                      values.invoiceEmails.map((bankAccount, index) => (
+                        <div className="mb-4" key={index}>
+                          {index > 0 && (
+                            <div className="d-flex justify-content-end">
+                              <button
+                                type="button"
+                                className="btn btn-link link-danger"
+                                onClick={() => remove(index)}
+                              >
+                                - Удалить email
+                              </button>
+                            </div>
+                          )}
+                          <TextInput
+                            name={`invoiceEmails.${index}`}
+                            label="Email"
+                            placeholder="Email"
+                            type="text"
+                            requiredInput
+                          />
+                        </div>
+                      ))}
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-dashed w-100"
+                      onClick={() => push('')}
+                    >
+                      + Добавить еще email
                     </button>
                   </div>
                 )}

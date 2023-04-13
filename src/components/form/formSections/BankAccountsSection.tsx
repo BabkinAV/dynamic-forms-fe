@@ -1,6 +1,5 @@
 import React from 'react';
 import TextInput from '../formElements/TextInput';
-import { FieldArray } from 'formik';
 
 const BankAccountsSection = ({ index }: { index: number }) => {
   return (
@@ -43,39 +42,3 @@ const BankAccountsSection = ({ index }: { index: number }) => {
 };
 
 export default BankAccountsSection;
-
-{
-  /* <TextInput
-          name="accountName"
-          type="text"
-          placeholder="Введите название счет"
-          label="Название счета"
-          className="mb-2"
-          requiredInput
-        />
-        <TextInput
-          name="accountNumber"
-          type="text"
-          placeholder="Введите номер счета"
-          className="mb-2"
-          label="Номер счета"
-          requiredInput
-        />
-        <TextInput
-          name="accountBIK"
-          type="text"
-          placeholder="Введите БИК счета"
-          className="mb-2"
-          label="Дней отсрочки"
-          requiredInput
-        />
-        <TextInput
-          name="corrAccountNumber"
-          type="text"
-          placeholder="Корр. номер счета"
-          className="mb-2"
-          label="Корр. номер счета"
-          requiredInput
-        />
-        <hr /> */
-}

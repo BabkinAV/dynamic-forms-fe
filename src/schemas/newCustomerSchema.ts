@@ -38,6 +38,7 @@ export const newCustomerValidationSchema = Yup.object({
         .required('Введите номер счета'),
     })
   ),
+	invoiceEmails: Yup.array().of(Yup.string().email('Введите корректный email').required('Введите Email'))
 });
 
 export const newCustomerInitialValues = {
@@ -58,4 +59,5 @@ export const newCustomerInitialValues = {
       corr_account_number: '',
     },
   ],
+	invoiceEmails: ['']
 };
