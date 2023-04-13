@@ -1,5 +1,5 @@
 import React from 'react';
-import TextInput from './TextInput';
+import TextInput from '../formElements/TextInput';
 import { FieldArray } from 'formik';
 
 const BankAccountsSection = ({ index }: { index: number }) => {

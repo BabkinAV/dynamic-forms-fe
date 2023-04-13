@@ -2,16 +2,15 @@ import { Form, Formik, FieldArray } from 'formik';
 import axios from 'axios';
 import { ToastContainer, ToastOptions, toast } from 'react-toastify';
 
-import CustomerDetailsSection from './CustomerDetailsSection';
+import CustomerDetailsSection from './formSections/CustomerDetailsSection';
 import { Customer } from '../../types';
 import {
   newCustomerValidationSchema,
   newCustomerInitialValues,
 } from '../../schemas/newCustomerSchema';
 import { toastifyConfig } from '../../schemas/toastifySchema';
-import OrganizationDetailsSection from './OrganizationDetailsSection';
-import BankAccountsSection from './BankAccountsSection';
-import TextInput from './TextInput';
+import OrganizationDetailsSection from './formSections/OrganizationDetailsSection';
+import BankAccountsSection from './formSections/BankAccountsSection';
 
 const NewCustomerForm = ({
   handleCloseModal,
@@ -43,9 +42,8 @@ const NewCustomerForm = ({
                 kpp: values.kpp,
                 ogrn: values.ogrn,
                 addr: values.organizationAddr,
-								bank_accounts: values.bankAccounts
+                bank_accounts: values.bankAccounts,
               },
-
             })
             .then(resp => {
               setSubmitting(false);

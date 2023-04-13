@@ -1,5 +1,5 @@
 import React from 'react';
-import TextInput from './TextInput';
+import TextInput from '../formElements/TextInput';
 
 const OrganizationDetailsSection = () => {
   return (
