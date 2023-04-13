@@ -1,3 +1,11 @@
 .form-control.is-invalid {
 	background-image: unset;
 }
+
+.btn.btn-dashed {
+	border-style: dashed;
+}
+
+.btn.btn-link {
+	text-decoration: none;
+}

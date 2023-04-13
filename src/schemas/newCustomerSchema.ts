@@ -13,22 +13,49 @@ export const newCustomerValidationSchema = Yup.object({
     .typeError('Введите число')
     .min(0, 'Кредитный лимит должен быть больше или равен нулю')
     .required('Кредитный лимит должен быть больше или равен нулю'),
-		organizationName: Yup.string().required('Введите имя'),
-		inn: Yup.string().required('Введите имя'),
-		kpp: Yup.string().required('Введите имя'),
-		ogrn: Yup.string().required('Введите имя'),
-		organizationAddr: Yup.string().required('Введите имя'),
+  organizationName: Yup.string().required('Введите название организации'),
+  inn: Yup.number()
+    .typeError('введите только цифры')
+    .required('Введите ИНН организации'),
+  kpp: Yup.number()
+    .typeError('введите только цифры')
+    .required('Введите КПП организации'),
+  ogrn: Yup.number()
+    .typeError('введите только цифры')
+    .required('Введите ОГРН организации'),
+  organizationAddr: Yup.string().required('Введите юридический адрес'),
+  bankAccounts: Yup.array().of(
+    Yup.object().shape({
+      name: Yup.string().required('Введите название счета'),
+      account_number: Yup.number()
+        .typeError('введите только цифры')
+        .required('Введите номер счета'),
+      bik: Yup.number()
+        .typeError('введите только цифры')
+        .required('Введите БИК счета'),
+      corr_account_number: Yup.number()
+        .typeError('введите только цифры')
+        .required('Введите номер счета'),
+    })
+  ),
 });
 
 export const newCustomerInitialValues = {
-	customerName: '',
-	customerEmail: '',
-	deferralDays: '',
-	creditLimit: '',
-	organizationName: '',
-	inn: '',
-	kpp: '',
-	ogrn: '',
-	organizationAddr: '',
-	
-}
+  customerName: '',
+  customerEmail: '',
+  deferralDays: '',
+  creditLimit: '',
+  organizationName: '',
+  inn: '',
+  kpp: '',
+  ogrn: '',
+  organizationAddr: '',
+  bankAccounts: [
+    {
+      name: '',
+      bik: '',
+      account_number: '',
+      corr_account_number: '',
+    },
+  ],
+};

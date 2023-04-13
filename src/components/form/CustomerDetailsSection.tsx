@@ -8,7 +8,7 @@ const CustomerDetailsSection = () => {
       <TextInput
         name="customerName"
         type="text"
-        placeholder="Введите имя"
+        placeholder="Имя"
         label="Имя"
         className="mb-2"
         requiredInput
@@ -16,7 +16,7 @@ const CustomerDetailsSection = () => {
       <TextInput
         name="customerEmail"
         type="text"
-        placeholder="Введите Email"
+        placeholder="Email"
         className="mb-2"
         label="Email"
         requiredInput
@@ -24,7 +24,7 @@ const CustomerDetailsSection = () => {
       <TextInput
         name="deferralDays"
         type="text"
-        placeholder="Введите дни отстрочки"
+        placeholder="Дни отстрочки"
         className="mb-2"
         label="Дней отсрочки"
         requiredInput
@@ -32,7 +32,7 @@ const CustomerDetailsSection = () => {
       <TextInput
         name="creditLimit"
         type="text"
-        placeholder="Введите кредитный лимит"
+        placeholder="Кредитный лимит"
         className="mb-2"
         label="Кредитный лимит"
         requiredInput

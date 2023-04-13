@@ -8,7 +8,7 @@ const OrganizationDetailsSection = () => {
       <TextInput
         name="organizationName"
         type="text"
-        placeholder="Введите название организации"
+        placeholder="Название организации"
         label="Название организации"
         className="mb-2"
         requiredInput
@@ -16,7 +16,7 @@ const OrganizationDetailsSection = () => {
       <TextInput
         name="inn"
         type="text"
-        placeholder="Введите ИНН организации"
+        placeholder="ИНН организации"
         className="mb-2"
         label="ИНН организации"
         requiredInput
@@ -24,7 +24,7 @@ const OrganizationDetailsSection = () => {
       <TextInput
         name="kpp"
         type="text"
-        placeholder="введите КПП организации"
+        placeholder="КПП организации"
         className="mb-2"
         label="КПП организации"
         requiredInput
@@ -32,7 +32,7 @@ const OrganizationDetailsSection = () => {
       <TextInput
         name="ogrn"
         type="text"
-        placeholder="введите ОГРН организации"
+        placeholder="ОГРН организации"
         className="mb-2"
         label="ОГРН организации"
         requiredInput
@@ -40,7 +40,7 @@ const OrganizationDetailsSection = () => {
       <TextInput
         name="organizationAddr"
         type="text"
-        placeholder="Введите юридический адрес"
+        placeholder="Юридический адрес"
         className="mb-2"
         label="Юридический адрес"
         requiredInput

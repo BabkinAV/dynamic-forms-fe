@@ -1,7 +1,6 @@
 import React from 'react';
 import { InputHTMLAttributes, ClassAttributes } from 'react';
 import { FieldHookConfig } from 'formik';
-import type { ComponentPropsWithoutRef } from 'react';
 import { useField } from 'formik';
 
 type TextFieldProps = {
@@ -13,7 +12,7 @@ type TextFieldProps = {
 const TextInput = ({
   label,
   requiredInput,
-	className,
+  className,
   ...props
 }: TextFieldProps &
   InputHTMLAttributes<HTMLInputElement> &
@@ -21,7 +20,7 @@ const TextInput = ({
   FieldHookConfig<string>) => {
   const [field, meta] = useField(props);
   return (
-    <div className={className + ' form-group'}>
+    <div className={`${className ? className + ' ' : ''}form-group`}>
       <label htmlFor={props.id || props.name} className="mb-2">
         {requiredInput && <span className="text-danger">*</span>}
         {label}

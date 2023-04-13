@@ -1,4 +1,4 @@
-import { Form, Formik } from 'formik';
+import { Form, Formik, FieldArray } from 'formik';
 import axios from 'axios';
 import { ToastContainer, ToastOptions, toast } from 'react-toastify';
 
@@ -10,6 +10,8 @@ import {
 } from '../../schemas/newCustomerSchema';
 import { toastifyConfig } from '../../schemas/toastifySchema';
 import OrganizationDetailsSection from './OrganizationDetailsSection';
+import BankAccountsSection from './BankAccountsSection';
+import TextInput from './TextInput';
 
 const NewCustomerForm = ({
   handleCloseModal,
@@ -18,6 +20,11 @@ const NewCustomerForm = ({
   handleCloseModal: () => void;
   handleAddCustomer: (addedCustomer: Customer) => void;
 }) => {
+  const handleAddBankAccountClick = (pushBankAccount: () => void) => () => {
+    // pushAccountHandler()
+    pushBankAccount();
+  };
+
   return (
     <>
       <Formik
@@ -30,13 +37,15 @@ const NewCustomerForm = ({
               email: values.customerEmail,
               deferral_days: values.deferralDays,
               credit_limit: values.creditLimit,
-							organization: {
-								name: values.organizationName,
-								inn: values.inn,
-								kpp: values.kpp,
-								ogrn: values.ogrn,
-								addr: values.organizationAddr,
-							}
+              organization: {
+                name: values.organizationName,
+                inn: values.inn,
+                kpp: values.kpp,
+                ogrn: values.ogrn,
+                addr: values.organizationAddr,
+								bank_accounts: values.bankAccounts
+              },
+
             })
             .then(resp => {
               setSubmitting(false);
@@ -54,13 +63,59 @@ const NewCustomerForm = ({
             });
         }}
       >
-        <Form>
-          <CustomerDetailsSection />
-					<OrganizationDetailsSection />
-          <button type="submit" className="btn btn-primary mt-4">
-            Создать
-          </button>
-        </Form>
+        {({ values }) => (
+          <Form>
+            <CustomerDetailsSection />
+            <OrganizationDetailsSection />
+            <div className="mb-4">
+              <h5>
+                <b>Банковские счета</b>
+              </h5>
+              <FieldArray name="bankAccounts">
+                {({ insert, remove, push }) => (
+                  <div className="mb-4">
+                    {values.bankAccounts.length > 0 &&
+                      values.bankAccounts.map((bankAccount, index) => (
+                        <div className="mb-4" key={index}>
+                          {index > 0 && (
+                            <div className="d-flex justify-content-end">
+                              <button
+                                type="button"
+                                className="btn btn-link link-danger"
+                                onClick={() => remove(index)}
+                              >
+                                - Удалить счет
+                              </button>
+                            </div>
+                          )}
+
+                          <BankAccountsSection index={index} />
+                        </div>
+                      ))}
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-dashed w-100"
+                      onClick={handleAddBankAccountClick(() =>
+                        push({
+                          name: '',
+                          bik: '',
+                          account_number: '',
+                          corr_account_number: '',
+                        })
+                      )}
+                    >
+                      + Добавить еще счет
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
+            </div>
+
+            <button type="submit" className="btn btn-primary mt-4">
+              Создать
+            </button>
+          </Form>
+        )}
       </Formik>
       <ToastContainer
         position="bottom-center"
