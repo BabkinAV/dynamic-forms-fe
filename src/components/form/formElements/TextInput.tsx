@@ -7,12 +7,14 @@ type TextFieldProps = {
   label: string;
   name: string;
   requiredInput: boolean;
+	errorForm?: string;
 };
 
 const TextInput = ({
   label,
   requiredInput,
   className,
+	errorForm,
   ...props
 }: TextFieldProps &
   InputHTMLAttributes<HTMLInputElement> &
@@ -27,13 +29,15 @@ const TextInput = ({
       </label>
       <input
         className={`form-control ${
-          meta.touched && meta.error ? 'is-invalid' : null
+          meta.touched && (meta.error || errorForm) ? 'is-invalid' : null
         }`}
         {...field}
         {...props}
       />
-      {meta.touched && meta.error ? (
-        <div className="invalid-feedback">{meta.error}</div>
+      {meta.touched && (meta.error || errorForm) ? (
+        <div className="invalid-feedback">{`${
+          meta.error ? meta.error + ' ' : ''
+        }${errorForm ? errorForm: ''}`}</div>
       ) : null}
     </div>
   );

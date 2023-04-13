@@ -38,7 +38,22 @@ export const newCustomerValidationSchema = Yup.object({
         .required('Введите номер счета'),
     })
   ),
-	invoiceEmails: Yup.array().of(Yup.string().email('Введите корректный email').required('Введите Email'))
+  invoiceEmails: Yup.array().of(
+    Yup.string().email('Введите корректный email').required('Введите Email')
+  ),
+  meta: Yup.array()
+    .of(
+      Yup.object().shape({
+        key: Yup.string().required('Введите ключ'),
+        value: Yup.string(),
+      })
+    )
+  .test('unique-keys', 'Ключи не должны повторяться', values => {
+    if (values) {
+      return new Set(values.map(el => el.key)).size === values.length;
+    }
+  	return false
+  }),
 });
 
 export const newCustomerInitialValues = {
@@ -59,5 +74,11 @@ export const newCustomerInitialValues = {
       corr_account_number: '',
     },
   ],
-	invoiceEmails: ['']
+  invoiceEmails: [''],
+  meta: [
+    {
+      key: '',
+      value: '',
+    },
+  ],
 };

@@ -11,6 +11,7 @@ import {
 import { toastifyConfig } from '../../schemas/toastifySchema';
 import OrganizationDetailsSection from './formSections/OrganizationDetailsSection';
 import BankAccountsSection from './formSections/BankAccountsSection';
+import MetaSection from './formSections/MetaSection';
 import TextInput from './formElements/TextInput';
 
 const NewCustomerForm = ({
@@ -45,7 +46,7 @@ const NewCustomerForm = ({
                 addr: values.organizationAddr,
                 bank_accounts: values.bankAccounts,
               },
-							invoice_emails: values.invoiceEmails
+              invoice_emails: values.invoiceEmails,
             })
             .then(resp => {
               setSubmitting(false);
@@ -63,7 +64,7 @@ const NewCustomerForm = ({
             });
         }}
       >
-        {({ values }) => (
+        {({ values, errors }) => (
           <Form>
             <CustomerDetailsSection />
             <OrganizationDetailsSection />
@@ -118,7 +119,7 @@ const NewCustomerForm = ({
                 {({ insert, remove, push }) => (
                   <div className="mb-2">
                     {values.invoiceEmails.length > 0 &&
-                      values.invoiceEmails.map((bankAccount, index) => (
+                      values.invoiceEmails.map((invoiceEmail, index) => (
                         <div className="mb-4" key={index}>
                           {index > 0 && (
                             <div className="d-flex justify-content-end">
@@ -151,7 +152,48 @@ const NewCustomerForm = ({
                 )}
               </FieldArray>
             </div>
-
+            <div className="mb-4">
+              <h5>
+                <b>Meta</b>
+              </h5>
+              <FieldArray name="meta">
+                {({ insert, remove, push }) => (
+                  <div className="mb-2">
+                    {values.meta.length > 0 &&
+                      values.meta.map((keyValue, index) => (
+                        <div className="mb-4" key={index}>
+                          <div className="d-flex justify-content-end">
+                            <button
+                              type="button"
+                              className="btn btn-link link-danger"
+                              onClick={() => remove(index)}
+                            >
+                              - Удалить ключ-значение
+                            </button>
+                          </div>
+                          <MetaSection
+                            index={index}
+                            errorForm={
+                              typeof errors.meta === 'string'
+                                ? errors.meta
+                                : undefined
+                            }
+                          />
+                        </div>
+                      ))}
+                    {}
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-dashed w-100"
+                      onClick={() => push({ key: '', value: '' })}
+                    >
+                      + Добавить ключ-значение
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
+            </div>
+            {}
             <button type="submit" className="btn btn-primary mt-4">
               Создать
             </button>
