@@ -1,7 +1,18 @@
 import React from 'react';
 import TextInput from '../formElements/TextInput';
+import Switcher from '../formElements/Switcher';
 
-const BankAccountsSection = ({ index }: { index: number }) => {
+const BankAccountsSection = ({
+  index,
+	isDefault,
+	switcherLocked,
+	handleSwitcherChange
+}: {
+  index: number;
+	isDefault: boolean;
+	switcherLocked: boolean;
+	handleSwitcherChange: (index: number)=>void
+}) => {
   return (
     <div className="mb-4">
       <TextInput
@@ -36,6 +47,28 @@ const BankAccountsSection = ({ index }: { index: number }) => {
         label="Корр. номер счета"
         requiredInput
       />
+      {/* <Switcher
+        id={`bankAccounts.${index}.isDefault`}
+        name={`bankAccounts.${index}.isDefault`}
+				onChange={handleSwitcherChange}
+      /> */}
+      <div className="form-check form-switch form-switch-lg">
+        <input
+          className="form-check-input"
+          type="checkbox"
+          role="switch"
+          id={`bankAccounts.${index}.isDefaultSwitch`}
+          checked={isDefault}
+          disabled={switcherLocked}
+          onChange={() => handleSwitcherChange(index)}
+        />
+        <label
+          className="form-check-label"
+          htmlFor={`bankAccounts.${index}.isDefaultSwitch`}
+        >
+          Дефолтный счет
+        </label>
+      </div> 
       <hr />
     </div>
   );
