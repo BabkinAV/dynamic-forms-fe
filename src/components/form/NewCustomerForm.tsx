@@ -14,6 +14,7 @@ import OrganizationDetailsSection from './formSections/OrganizationDetailsSectio
 import BankAccountsSection from './formSections/BankAccountsSection';
 import MetaSection from './formSections/MetaSection';
 import TextInput from './formElements/TextInput';
+import InvoiceEmailsSection from './formSections/InvoiceEmailsSection';
 
 const NewCustomerForm = ({
   handleCloseModal,
@@ -86,146 +87,23 @@ const NewCustomerForm = ({
           <Form>
             <CustomerDetailsSection />
             <OrganizationDetailsSection />
-            <div className="mb-4">
-              <h5>
-                <b>Банковские счета</b>
-              </h5>
-              <FieldArray name="bankAccounts">
-                {({ insert, remove, push }) => (
-                  <div className="mb-4">
-                    {values.bankAccounts.length > 0 &&
-                      values.bankAccounts.map((bankAccount, index) => (
-                        <div className="mb-4" key={index}>
-                          {index > 0 && (
-                            <div className="d-flex justify-content-end">
-                              <button
-                                type="button"
-                                className="btn btn-link link-danger"
-                                onClick={handleRemoveBankAccountClick(
-                                  () => remove(index),
-                                  index
-                                )}
-                              >
-                                - Удалить счет
-                              </button>
-                            </div>
-                          )}
 
-                          <BankAccountsSection
-                            index={index}
-                            isDefault={defaultBankAccountIdx === index}
-                            switcherLocked={values.bankAccounts.length === 1}
-                            handleSwitcherChange={
-                              defaultBankAccountSwitchClickHandler
-                            }
-                          />
-                        </div>
-                      ))}
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary btn-dashed w-100"
-                      onClick={() =>
-                        push({
-                          name: '',
-                          bik: '',
-                          account_number: '',
-                          corr_account_number: '',
-                        })
-                      }
-                    >
-                      + Добавить еще счет
-                    </button>
-                  </div>
-                )}
-              </FieldArray>
-            </div>
-            <div className="mb-4">
-              <h5>
-                <b>Emails для счетов</b>
-              </h5>
-              <FieldArray name="invoiceEmails">
-                {({ insert, remove, push }) => (
-                  <div className="mb-2">
-                    {values.invoiceEmails.length > 0 &&
-                      values.invoiceEmails.map((invoiceEmail, index) => (
-                        <div className="mb-4" key={index}>
-                          {index > 0 && (
-                            <div className="d-flex justify-content-end">
-                              <button
-                                type="button"
-                                className="btn btn-link link-danger"
-                                onClick={() => remove(index)}
-                              >
-                                - Удалить email
-                              </button>
-                            </div>
-                          )}
-                          <TextInput
-                            name={`invoiceEmails.${index}`}
-                            label="Email"
-                            placeholder="Email"
-                            type="text"
-                            requiredInput
-                          />
-                        </div>
-                      ))}
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary btn-dashed w-100"
-                      onClick={() => push('')}
-                    >
-                      + Добавить еще email
-                    </button>
-                  </div>
-                )}
-              </FieldArray>
-            </div>
-            <div className="mb-4">
-              <h5>
-                <b>Meta</b>
-              </h5>
+            <BankAccountsSection
+              defaultBankAccountIdx={defaultBankAccountIdx}
+              switcherLocked={values.bankAccounts.length === 1}
+              handleSwitcherChange={defaultBankAccountSwitchClickHandler}
+              bankAccounts={values.bankAccounts}
+              handleRemoveBankAccountClick={handleRemoveBankAccountClick}
+            />
+            <InvoiceEmailsSection invoiceEmails={values.invoiceEmails} />
 
-              <FieldArray name="meta">
-                {({ insert, remove, push }) => (
-                  <div className="mb-4">
-                    <table className="table table-bordered">
-                      <thead className="table-light text-center">
-                        <tr>
-                          <th scope="col">Ключ</th>
-                          <th scope="col">Значение</th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {values.meta.length > 0 &&
-                          values.meta.map((keyValue, index) => (
-                            <tr className="mb-4" key={index}>
-                              <MetaSection
-                                index={index}
-                                errorForm={
-                                  typeof errors.meta === 'string'
-                                    ? errors.meta
-                                    : undefined
-                                }
-                                removeRowButtonHandler={() => remove(index)}
-                              />
-                            </tr>
-                          ))}
-                      </tbody>
-                    </table>
-                    <div className='d-flex justify-content-end'>
-                      <button
-                        type="button"
-                        className="btn btn-link "
-                        onClick={() => push({ key: '', value: '' })}
-                      >
-                        Добавить еще ключ-значение
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </FieldArray>
-            </div>
+            <MetaSection
+              errorForm={
+                typeof errors.meta === 'string' ? errors.meta : undefined
+              }
+              meta={values.meta}
+            />
+
             <button type="submit" className="btn btn-primary mt-4">
               Создать
             </button>
