@@ -25,7 +25,7 @@ const MetaSection = ({
               </tr>
             </thead>
             <tbody>
-              {meta.length > 0 &&
+              {meta.length > 0 ? (
                 meta.map((keyValue, index) => (
                   <tr className="mb-4" key={index}>
                     <td>
@@ -60,7 +60,12 @@ const MetaSection = ({
                       </button>
                     </td>
                   </tr>
-                ))}
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={3} className='text-secondary text-center'>No data</td>
+                </tr>
+              )}
             </tbody>
           </table>
           <div className="d-flex justify-content-end">

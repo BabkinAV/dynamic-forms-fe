@@ -48,12 +48,12 @@ export const newCustomerValidationSchema = Yup.object({
         value: Yup.string(),
       })
     )
-  .test('unique-keys', 'Ключи не должны повторяться', values => {
-    if (values) {
-      return new Set(values.map(el => el.key)).size === values.length;
-    }
-  	return false
-  }),
+    .test('unique-keys', 'Ключи не должны повторяться', values => {
+      if (values) {
+        return new Set(values.map(el => el.key)).size === values.length;
+      }
+      return false;
+    }),
 });
 
 export const newCustomerInitialValues = {
@@ -75,10 +75,5 @@ export const newCustomerInitialValues = {
     },
   ],
   invoiceEmails: [''],
-  meta: [
-    {
-      key: '',
-      value: '',
-    },
-  ],
+  meta: [],
 };
