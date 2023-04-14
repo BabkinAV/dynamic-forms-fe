@@ -44,7 +44,6 @@ const NewCustomerForm = ({
         initialValues={newCustomerInitialValues}
         validationSchema={newCustomerValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
-
           axios
             .post<Customer>('http://localhost:8080/customers', {
               name: values.customerName,
@@ -63,9 +62,9 @@ const NewCustomerForm = ({
               },
               invoice_emails: values.invoiceEmails,
               meta: values.meta.reduce(
-								(obj, d) => Object.assign(obj, { [d.key]: d.value }),
-								{}
-							),
+                (obj, d) => Object.assign(obj, { [d.key]: d.value }),
+                {}
+              ),
             })
             .then(resp => {
               setSubmitting(false);
@@ -185,44 +184,48 @@ const NewCustomerForm = ({
               <h5>
                 <b>Meta</b>
               </h5>
+
               <FieldArray name="meta">
                 {({ insert, remove, push }) => (
-                  <div className="mb-2">
-                    {values.meta.length > 0 &&
-                      values.meta.map((keyValue, index) => (
-                        <div className="mb-4" key={index}>
-                          <div className="d-flex justify-content-end">
-                            <button
-                              type="button"
-                              className="btn btn-link link-danger"
-                              onClick={() => remove(index)}
-                            >
-                              - Удалить ключ-значение
-                            </button>
-                          </div>
-                          <MetaSection
-                            index={index}
-                            errorForm={
-                              typeof errors.meta === 'string'
-                                ? errors.meta
-                                : undefined
-                            }
-                          />
-                        </div>
-                      ))}
-                    {}
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary btn-dashed w-100"
-                      onClick={() => push({ key: '', value: '' })}
-                    >
-                      + Добавить ключ-значение
-                    </button>
+                  <div className="mb-4">
+                    <table className="table table-bordered">
+                      <thead className="table-light text-center">
+                        <tr>
+                          <th scope="col">Ключ</th>
+                          <th scope="col">Значение</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {values.meta.length > 0 &&
+                          values.meta.map((keyValue, index) => (
+                            <tr className="mb-4" key={index}>
+                              <MetaSection
+                                index={index}
+                                errorForm={
+                                  typeof errors.meta === 'string'
+                                    ? errors.meta
+                                    : undefined
+                                }
+                                removeRowButtonHandler={() => remove(index)}
+                              />
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                    <div className='d-flex justify-content-end'>
+                      <button
+                        type="button"
+                        className="btn btn-link "
+                        onClick={() => push({ key: '', value: '' })}
+                      >
+                        Добавить еще ключ-значение
+                      </button>
+                    </div>
                   </div>
                 )}
               </FieldArray>
             </div>
-            {}
             <button type="submit" className="btn btn-primary mt-4">
               Создать
             </button>

@@ -25,3 +25,7 @@
 .form-switch.form-switch-lg .form-check-label {
 	margin-top: 0.35rem;
 } 
+
+.modal-dialog {
+	min-width: 30vw;
+}

@@ -7,14 +7,16 @@ type TextFieldProps = {
   label: string;
   name: string;
   requiredInput: boolean;
-	errorForm?: string;
+  errorForm?: string;
+  hiddenLabel?: boolean;
 };
 
 const TextInput = ({
   label,
   requiredInput,
   className,
-	errorForm,
+  errorForm,
+  hiddenLabel,
   ...props
 }: TextFieldProps &
   InputHTMLAttributes<HTMLInputElement> &
@@ -23,7 +25,10 @@ const TextInput = ({
   const [field, meta] = useField(props);
   return (
     <div className={`${className ? className + ' ' : ''}form-group`}>
-      <label htmlFor={props.id || props.name} className="mb-2">
+      <label
+        htmlFor={props.id || props.name}
+        className={`mb-2${hiddenLabel ? ' visually-hidden' : null}`}
+      >
         {requiredInput && <span className="text-danger">*</span>}
         {label}
       </label>
@@ -37,7 +42,7 @@ const TextInput = ({
       {meta.touched && (meta.error || errorForm) ? (
         <div className="invalid-feedback">{`${
           meta.error ? meta.error + ' ' : ''
-        }${errorForm ? errorForm: ''}`}</div>
+        }${errorForm ? errorForm : ''}`}</div>
       ) : null}
     </div>
   );

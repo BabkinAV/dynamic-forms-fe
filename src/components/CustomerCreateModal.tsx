@@ -13,7 +13,7 @@ const CustomerCreateModal = ({
   handleAddCustomer: (addedCustomer: Customer) => void;
 }) => {
   return (
-    <Modal show={showModal} onHide={handleClose}>
+    <Modal show={showModal} onHide={handleClose} dialogClassName="modal-90w">
       <Modal.Header closeButton>
         <Modal.Title>Создание цены</Modal.Title>
       </Modal.Header>
