@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Form, Formik, FieldArray } from 'formik';
 import axios from 'axios';
 import { ToastContainer, ToastOptions, toast } from 'react-toastify';
+import Accordion from 'react-bootstrap/Accordion';
 
 import CustomerDetailsSection from './formSections/CustomerDetailsSection';
 import { Customer } from '../../types';
@@ -13,7 +14,6 @@ import { toastifyConfig } from '../../schemas/toastifySchema';
 import OrganizationDetailsSection from './formSections/OrganizationDetailsSection';
 import BankAccountsSection from './formSections/BankAccountsSection';
 import MetaSection from './formSections/MetaSection';
-import TextInput from './formElements/TextInput';
 import InvoiceEmailsSection from './formSections/InvoiceEmailsSection';
 
 const NewCustomerForm = ({
@@ -40,7 +40,7 @@ const NewCustomerForm = ({
   };
 
   return (
-    <>
+    <Accordion defaultActiveKey={['0', '1', '2', '3', '4']} alwaysOpen flush>
       <Formik
         initialValues={newCustomerInitialValues}
         validationSchema={newCustomerValidationSchema}
@@ -85,28 +85,52 @@ const NewCustomerForm = ({
       >
         {({ values, errors, setFieldValue }) => (
           <Form>
-            <CustomerDetailsSection />
-            <OrganizationDetailsSection />
-
-            <BankAccountsSection
-              defaultBankAccountIdx={defaultBankAccountIdx}
-              switcherLocked={values.bankAccounts.length === 1}
-              handleSwitcherChange={defaultBankAccountSwitchClickHandler}
-              bankAccounts={values.bankAccounts}
-              handleRemoveBankAccountClick={handleRemoveBankAccountClick}
-            />
-            <InvoiceEmailsSection invoiceEmails={values.invoiceEmails} />
-
-            <MetaSection
-              errorForm={
-                typeof errors.meta === 'string' ? errors.meta : undefined
-              }
-              meta={values.meta}
-            />
-
-            <button type="submit" className="btn btn-primary mt-4">
-              Создать
-            </button>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Детали Клиента</Accordion.Header>
+              <Accordion.Body>
+                <CustomerDetailsSection />
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header>Детали Организации</Accordion.Header>
+              <Accordion.Body>
+                <OrganizationDetailsSection />
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="2">
+              <Accordion.Header>Банковские счета</Accordion.Header>
+              <Accordion.Body>
+                <BankAccountsSection
+                  defaultBankAccountIdx={defaultBankAccountIdx}
+                  switcherLocked={values.bankAccounts.length === 1}
+                  handleSwitcherChange={defaultBankAccountSwitchClickHandler}
+                  bankAccounts={values.bankAccounts}
+                  handleRemoveBankAccountClick={handleRemoveBankAccountClick}
+                />
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="3">
+              <Accordion.Header>Emails для счетов</Accordion.Header>
+              <Accordion.Body>
+                <InvoiceEmailsSection invoiceEmails={values.invoiceEmails} />
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="4">
+              <Accordion.Header>Meta</Accordion.Header>
+              <Accordion.Body>
+                <MetaSection
+                  errorForm={
+                    typeof errors.meta === 'string' ? errors.meta : undefined
+                  }
+                  meta={values.meta}
+                />
+              </Accordion.Body>
+            </Accordion.Item>
+            <div className="d-flex justify-content-center">
+              <button type="submit" className="btn btn-primary mt-4">
+                Создать
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
@@ -122,7 +146,7 @@ const NewCustomerForm = ({
         pauseOnHover={false}
         theme="light"
       />
-    </>
+    </Accordion>
   );
 };
 

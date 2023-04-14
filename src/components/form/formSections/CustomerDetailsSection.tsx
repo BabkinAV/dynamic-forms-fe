@@ -3,21 +3,20 @@ import TextInput from '../formElements/TextInput';
 
 const CustomerDetailsSection = () => {
   return (
-    <div className="mb-4">
-			<h5><b>Детали клиента</b></h5>
+    <>
       <TextInput
         name="customerName"
         type="text"
         placeholder="Имя"
         label="Имя"
-        className="mb-2"
+        className="mb-3"
         requiredInput
       />
       <TextInput
         name="customerEmail"
         type="text"
         placeholder="Email"
-        className="mb-2"
+        className="mb-3"
         label="Email"
         requiredInput
       />
@@ -25,7 +24,7 @@ const CustomerDetailsSection = () => {
         name="deferralDays"
         type="text"
         placeholder="Дни отстрочки"
-        className="mb-2"
+        className="mb-3"
         label="Дней отсрочки"
         requiredInput
       />
@@ -33,11 +32,11 @@ const CustomerDetailsSection = () => {
         name="creditLimit"
         type="text"
         placeholder="Кредитный лимит"
-        className="mb-2"
+        className="mb-3"
         label="Кредитный лимит"
         requiredInput
       />
-    </div>
+    </>
   );
 };
 
