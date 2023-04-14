@@ -5,9 +5,8 @@ import axios from 'axios';
 import { Customer } from '../types';
 import CustomerCreateModal from '../components/CustomerCreateModal';
 
-export default function Home() {
-  const [customerDataArr, setCustomerDataArr] =
-    useState<Customer[]>([]);
+export default function Home({customerData}: {customerData: Customer[]}) {
+  const [customerDataArr, setCustomerDataArr] = useState<Customer[]>(customerData);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -16,17 +15,6 @@ export default function Home() {
       return [addedCustomer, ...prevArrState];
     });
   };
-
-  useEffect(() => {
-    axios
-      .get<Customer[]>('http://localhost:8080/customers?_sort=created_at&_order=desc')
-      .then(resp => {
-				setCustomerDataArr(resp.data)
-			})
-      .catch(err => {
-				console.log(err);
-			});
-  }, []);
 
   let tableRows = customerDataArr.map(el => ({
     customerName: el.name,
@@ -71,4 +59,19 @@ export default function Home() {
       </main>
     </>
   );
+}
+
+export async function getServerSideProps() {
+
+  let res = await axios.get<Customer[]>(
+    'http://localhost:8080/customers?_sort=created_at&_order=desc'
+  );
+	const customerData = res.data;
+
+
+  return {
+    props: {
+      customerData,
+    }, 
+  };
 }
