@@ -1,6 +1,5 @@
 import React from 'react';
 import TextInput from '../formElements/TextInput';
-import Switcher from '../formElements/Switcher';
 
 const BankAccountsSection = ({
   index,
@@ -47,11 +46,6 @@ const BankAccountsSection = ({
         label="Корр. номер счета"
         requiredInput
       />
-      {/* <Switcher
-        id={`bankAccounts.${index}.isDefault`}
-        name={`bankAccounts.${index}.isDefault`}
-				onChange={handleSwitcherChange}
-      /> */}
       <div className="form-check form-switch form-switch-lg">
         <input
           className="form-check-input"
