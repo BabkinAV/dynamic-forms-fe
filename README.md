@@ -1,38 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dynamic forms app
 
-## Getting Started
+## Overview
 
-First, run the development server:
+A Small demo app featuring dynamic form segments and complex validation logic. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![screenshot](https://user-images.githubusercontent.com/47148325/232214475-c20ae7d2-731d-4ee0-8de0-565140ed46e6.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Tech used / dependencies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. [NextJS](https://nextjs.org/)
+2. [React Bootstrap](https://react-bootstrap.github.io/)
+3. [Formik](https://formik.org/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Running the project locally
+From the repo:
+1. Clone the project and backend code ([https://github.com/BabkinAV/dynamic-forms-be](https://github.com/BabkinAV/dynamic-forms-be)) locally into separate directories
+2. cd into backend directory
+3. Run `npm install` 
+4. Run `node server.js` after install
+5. cd into frontend directory
+6. Run `npm install`
+7. Run `npm run dev` after install
+8. Visit `http://localhost:3000` in browser window
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
