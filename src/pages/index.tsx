@@ -64,7 +64,7 @@ export default function Home({customerData}: {customerData: Customer[]}) {
 export async function getServerSideProps() {
 
   let res = await axios.get<Customer[]>(
-    `${process.env.BACKEND_ADDRESS ?? 'http://backend:8080'}/customers?_sort=created_at&_order=desc`
+    `${process.env.NEXT_PUBLIC_BACKEND_ADDRESS ?? 'http://backend:8080'}/customers?_sort=created_at&_order=desc`
   );
 	const customerData = res.data;
 
