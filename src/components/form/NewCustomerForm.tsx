@@ -46,7 +46,7 @@ const NewCustomerForm = ({
         validationSchema={newCustomerValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
           axios
-            .post<Customer>('http://localhost:8080/customers', {
+            .post<Customer>(`${process.env.BACKEND_ADDRESS ?? 'http://localhost:8080'}/customers`, {
               name: values.customerName,
               email: values.customerEmail,
               deferral_days: values.deferralDays,
