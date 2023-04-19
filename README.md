@@ -23,5 +23,5 @@ From the repo:
 5. cd into frontend directory
 6. Run `npm install`
 7. Run `npm run dev` after install
-8. Visit `http://localhost:3000` in browser window
+8. Visit `http://localhost:3000` in the browser window
 
